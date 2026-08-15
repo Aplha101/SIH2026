@@ -32,6 +32,8 @@ def get_all_users():
     res = cursor.fetchall()
     cursor.close()
     conn.close()
+    
+    
 
     return jsonify({"success": True, "res": res})
 
