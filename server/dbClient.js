@@ -17,5 +17,4 @@ async function callPdb(endpoint, method = 'GET', bodyData = null) {
 }
 
 
-    
 module.exports = { callPdb };

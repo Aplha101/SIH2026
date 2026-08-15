@@ -14,14 +14,7 @@ url = f"postgresql://postgres:{key}@db.kkjszxexisrfbctqllhn.supabase.co:5432/pos
 def get_db_connection():
     return psycopg2.connect(url)
 
-
-# -------------------------------------------------------------
-# DEFINE AND EXECUTE SQL QUERIES HERE IN PYTHON
-# -------------------------------------------------------------
-
-
-# Fetch All Users (SQL defined in Python)
-@app.route("/get-all", methods=["GET"])  # Changed to GET
+@app.route("/get-all", methods=["GET"])
 def get_all_users():
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
@@ -34,6 +27,8 @@ def get_all_users():
     conn.close()
 
     return jsonify({"success": True, "res": res})
+
+
 
 if __name__ == '__main__':
     print("Starting Flask DB service on port 5000...")
