@@ -10,7 +10,6 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/landing/index.html'));
 });
-
 app.get('/api/get-all', async (req, res) => {
     const response = await callPdb('/get-all', 'GET');
     res.json({ users: response.res });
