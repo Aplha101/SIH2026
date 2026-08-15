@@ -34,12 +34,12 @@ def signup():
         cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
     
-        cursor.execute("SELECT id FROM profiles WHERE email = %s", (email,))
+        cursor.execute("SELECT id FROM users WHERE email = %s", (email,))
         if cursor.fetchone():
             return jsonify({"success": False, "error": "Account with this email already exists"}), 409
 
         sql = """
-            INSERT INTO profiles (role, full_name, email, password)
+            INSERT INTO users (role, full_name, email, password)
             VALUES (%s, %s, %s, %s) RETURNING id, role, full_name, email;
         """
         cursor.execute(sql, (role, full_name, email, password))
@@ -68,7 +68,7 @@ def login():
         conn = get_db_connection()
         cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
-        cursor.execute("SELECT id, role, full_name, email, password FROM profiles WHERE email = %s", (email,))
+        cursor.execute("SELECT id, role, full_name, email, password FROM users WHERE email = %s", (email,))
         user = cursor.fetchone()
         
         cursor.close()
@@ -115,7 +115,7 @@ def get_all_requests():
         sql = """
             SELECT sr.*, p.full_name as student_name 
             FROM support_requests sr
-            JOIN profiles p ON sr.student_id = p.id
+            JOIN users p ON sr.student_id = p.id
             ORDER BY sr.created_at DESC
         """
         cursor.execute(sql)
@@ -156,7 +156,7 @@ def create_request():
 def update_status(request_id):
     try:
         data = request.json
-        new_status = data['status'] # e.g., 'in-progress' or 'resolved'
+        new_status = data['status'] 
         
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -171,6 +171,37 @@ def update_status(request_id):
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 
+@app.route("/requests/<request_id>/status", methods=["PATCH"])
+def update_status(request_id):
+    conn = None
+    try:
+        data = request.json
+        new_status = data['status']
+        counselor_id = data.get('counselor_id') 
+        
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            sql_update = "UPDATE support_requests SET status = %s WHERE id = %s"
+            cursor.execute(sql_update, (new_status, request_id))
+            
+            sql_audit = """
+                INSERT INTO audit_logs (action_type, target_request_id) 
+                VALUES (%s, %s)
+            """
+            action_desc = f"Status updated to {new_status} by user {counselor_id}"
+            cursor.execute(sql_audit, (action_desc, request_id))
+            
+            conn.commit()
+            
+        return jsonify({"success": True, "message": "Status updated and logged securely"})
+    except Exception as e:
+        if conn: conn.rollback() 
+        app.logger.error(f"Status update error: {e}")
+        return jsonify({"success": False, "error": "Internal server error"}), 500
+    finally:
+        if conn: conn.close()
+
 if __name__ == '__main__':
     print("Starting Flask DB service on port 5000...")
     app.run(host='0.0.0.0', port=5000, debug=True)
+
