@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MindfulU | Create Account</title>
-    
-    <!-- Google Fonts matching the main theme -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
@@ -15,7 +13,6 @@
 </head>
 
 <body>
-    <!-- Background Animated Blobs matching the main theme palette -->
     <div class="shape shape-one"></div>
     <div class="shape shape-two"></div>
     <div class="shape shape-three"></div>
@@ -23,9 +20,7 @@
     <main class="page">
         <div class="container">
 
-            <!-- Wrapped Left Column to maintain 2-column grid layout -->
             <div class="brand-column">
-                <!-- Brand Section -->
                 <section class="brand">
                     <div class="logo"></div>
                     <h1>MindfulU</h1>
@@ -68,10 +63,10 @@
                     <p>Create your free student account.</p>
                 </div>
 
-                <form id="signupForm" onsubmit="event.preventDefault(); signupUser();">
+                <form id="loginForm" onsubmit="event.preventDefault();">
                     <div class="input-group">
                         <span class="input-icon">✉</span>
-                        <input type="email" id="email" placeholder="Student Email ID" autocomplete="email" required>
+                        <input type="email" id="email" placeholder="Student Email ID"  name="data[email]"  autocomplete="email" required>
                     </div>
                     <div class="input-group">
                         <span class="input-icon">
@@ -79,9 +74,9 @@
                                 <path fill-rule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4M4.5 7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7zM8 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3" />
                             </svg>
                         </span>
-                        <input type="password" id="password" placeholder="Create Password" autocomplete="new-password" required>
+                        <input type="password" id="password" placeholder="Create Password" autocomplete="new-password" name="data[password]" required>
                         
-                        <button type="button" class="password-toggle" onclick="togglePassword()" aria-label="Show password" id="passwordToggle">
+                        <button type="button" class="password-toggle" onclick="togglePassword()"  aria-label="Show password" id="passwordToggle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                 <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
                                 <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
@@ -90,7 +85,7 @@
                     </div>
 
                     <button type="submit" id="login" class="login-btn">
-                        Create Account
+                        Login
                     </button>
                 </form>
 

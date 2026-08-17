@@ -1,3 +1,6 @@
+/* ==========================================================================
+   1. GLOBAL RESET & BASE STYLES
+   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -6,13 +9,11 @@
 
 html, body {
     width: 100%;
-    height: 100%;
-    overflow: hidden;
+    min-height: 100vh;
 }
 
 body {
     font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -27,6 +28,9 @@ body {
     color: #FFF9F2;
 }
 
+/* ==========================================================================
+   2. BACKGROUND BLOBS / ANIMATION
+   ========================================================================== */
 .shape {
     position: fixed;
     border-radius: 50%;
@@ -72,14 +76,16 @@ body {
     }
 }
 
+/* ==========================================================================
+   3. PAGE LAYOUT & CONTAINERS
+   ========================================================================== */
 .page {
     position: relative;
     z-index: 1;
     width: 100%;
     max-width: 960px;
     padding: 2rem 1.5rem;
-    max-height: 100vh;
-    overflow-y: auto;
+    margin: 0 auto;
 }
 
 .container {
@@ -89,19 +95,25 @@ body {
     align-items: center;
 }
 
-.brand {
-    text-align: left;
+.brand-column {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
 }
 
+.brand {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
 .brand h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 700;
     letter-spacing: -0.02em;
     color: #FFF9F2;
-    line-height: 1;
+    line-height: 1.1;
 }
 
 .brand-subtitle {
@@ -110,7 +122,6 @@ body {
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: rgba(255, 249, 242, 0.85);
-    margin-top: 0.25rem;
 }
 
 .tagline {
@@ -119,6 +130,9 @@ body {
     color: rgba(255, 249, 242, 0.95);
 }
 
+/* ==========================================================================
+   4. GLASSMORPHISM SUPPORT CARDS & FOOTER
+   ========================================================================== */
 .support-card {
     background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(12px);
@@ -129,7 +143,6 @@ body {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-top: 0.5rem;
 }
 
 .support-icon {
@@ -159,7 +172,6 @@ footer {
     text-align: left;
     font-size: 0.8rem;
     color: rgba(255, 249, 242, 0.7);
-    margin-top: 0.5rem;
 }
 
 footer a {
@@ -171,7 +183,10 @@ footer a:hover {
     text-decoration: underline;
 }
 
-.login-card {
+/* ==========================================================================
+   5. CARDS & DASHBOARD WIDGETS
+   ========================================================================== */
+.login-card, .dashboard-card {
     background-color: #F8EEE3;
     border-radius: 20px;
     padding: 2.25rem 2rem;
@@ -196,6 +211,7 @@ footer a:hover {
     margin-top: 0.25rem;
 }
 
+/* Form Inputs & Buttons */
 .input-group {
     position: relative;
     display: flex;
@@ -236,44 +252,6 @@ footer a:hover {
     color: #A0AEC0;
 }
 
-.password-toggle {
-    position: absolute;
-    right: 0.75rem;
-    background: none;
-    border: none;
-    color: #A0AEC0;
-    cursor: pointer;
-    padding: 0.35rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    transition: color 0.2s ease;
-}
-
-.password-toggle:hover {
-    color: #4A5568;
-}
-
-.forgot {
-    text-align: right;
-    margin-bottom: 1.25rem;
-}
-
-.forgot a,
-.create-account a {
-    color: #007FE2;
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 600;
-    transition: opacity 0.2s ease;
-}
-
-.forgot a:hover,
-.create-account a:hover {
-    text-decoration: underline;
-}
-
 .login-btn {
     width: 100%;
     padding: 0.85rem;
@@ -299,16 +277,37 @@ footer a:hover {
     transform: translateY(0);
 }
 
-.create-account {
-    text-align: center;
-    font-size: 0.875rem;
-    color: #718096;
-    margin-top: 1.25rem;
+/* Student Dashboard Widgets */
+.dashboard-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
 }
 
+.dashboard-list-item {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #2D3748;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ==========================================================================
+   6. RESPONSIVE BREAKPOINTS (MOBILE FIXES)
+   ========================================================================== */
 @media (max-width: 768px) {
-    html, body {
-        overflow: auto;
+    body {
+        align-items: flex-start;
+        padding-top: 1.5rem;
+    }
+
+    .page {
+        padding: 1rem;
     }
     
     .container {
@@ -320,104 +319,15 @@ footer a:hover {
         text-align: center;
     }
 
+    .brand h1 {
+        font-size: 2rem;
+    }
+
+    .login-card, .dashboard-card {
+        padding: 1.5rem 1.25rem;
+    }
+
     footer {
         text-align: center;
     }
-}
-
-/* --------------------------------
-   ROLE SELECT
--------------------------------- */
-
-.select-group {
-    position: relative;
-}
-
-.select-group select {
-    width: 100%;
-    padding: 0.85rem 2.75rem;
-    padding-right: 3rem;
-
-    font-family: inherit;
-    font-size: 0.95rem;
-    color: #2D3748;
-
-    background-color: #FFFFFF;
-
-    border: 1.5px solid #E2E8F0;
-    border-radius: 12px;
-
-    outline: none;
-
-    cursor: pointer;
-
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-
-    transition: all 0.2s ease;
-}
-
-.select-group select:focus {
-    border-color: #007FE2;
-
-    box-shadow:
-        0 0 0 3px rgba(0, 127, 226, 0.15);
-}
-
-
-/* Placeholder state */
-
-.select-group select:invalid {
-    color: #A0AEC0;
-}
-
-
-/* Actual selected option */
-
-.select-group select:valid {
-    color: #2D3748;
-}
-
-
-/* Dropdown options */
-
-.select-group select option {
-    color: #2D3748;
-    background-color: #FFFFFF;
-}
-
-
-/* Dropdown arrow */
-
-.select-arrow {
-    position: absolute;
-
-    right: 1rem;
-
-    top: 50%;
-
-    transform: translateY(-50%);
-
-    color: #A0AEC0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    pointer-events: none;
-}
-
-
-/* Hover */
-
-.select-group select:hover {
-    border-color: #CBD5E0;
-}
-
-
-/* Focus arrow */
-
-.select-group:focus-within .select-arrow {
-    color: #007FE2;
 }

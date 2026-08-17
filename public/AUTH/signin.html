@@ -68,13 +68,13 @@
                     <!-- Full Name -->
                     <div class="input-group">
                         <span class="input-icon">👤</span>
-                        <input type="text" id="fullname" placeholder="Full Name" autocomplete="name" required>
+                        <input type="text" id="fullname" placeholder="Full Name" autocomplete="name" name="data[full_name]" required>
                     </div>
 
                     <!-- Email / Student ID -->
                     <div class="input-group">
                         <span class="input-icon">✉</span>
-                        <input type="email" id="email" placeholder="Student Email ID" autocomplete="email" required>
+                        <input type="email" id="email" placeholder="Student Email ID" autocomplete="email" name="data[email]"required>
                     </div>
 
                     <!-- Password -->
@@ -84,7 +84,7 @@
                                 <path fill-rule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4M4.5 7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7zM8 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3" />
                             </svg>
                         </span>
-                        <input type="password" id="password" placeholder="Create Password" autocomplete="new-password" required>
+                        <input type="password" id="password" placeholder="Create Password" autocomplete="new-password" name="data[password]" required>
                         <button type="button" class="password-toggle" onclick="togglePassword()" aria-label="Show password" id="passwordToggle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                 <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
@@ -92,8 +92,41 @@
                             </svg>
                         </button>
                     </div>
+                    <!-- Role -->
+<div class="input-group select-group">
+    <span class="input-icon">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="16"
+             height="16"
+             fill="currentColor"
+             viewBox="0 0 16 16">
+            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+            <path d="M2 13s0-1 1-1 1-1 1-1 1-1 1-1h6c0 0 1 0 1 1s1 1 1 1 1 1 1 1v1H2v-1z"/>
+        </svg>
+    </span>
 
-                    <button type="submit" class="login-btn">
+    <select
+        id="role"
+        name="data[role]"
+        required
+    >
+        <option value="" disabled selected>Select your role</option>
+        <option value="student">Student</option>
+        <option value="counselor">Counselor</option>
+    </select>
+
+    <span class="select-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="14"
+             height="14"
+             fill="currentColor"
+             viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+        </svg>
+    </span>
+</div>
+                    <button type="submit" id="create" class="login-btn">
                         Create Account
                     </button>
                 </form>
@@ -127,5 +160,5 @@
         }
     </script>
 </body>
-
+<script src="signin.js"></script>
 </html>
