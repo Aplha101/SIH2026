@@ -43,9 +43,11 @@ key = os.getenv("SUPABASE_KEY")
 if not key:
     raise RuntimeError("SUPABASE_KEY is not set in .env")
 
+key = os.getenv("SUPABASE_KEY")
+
 url = (
-    f"postgresql://postgres:{key}"
-    f"@db.kkjszxexisrfbctqllhn.supabase.co:5432/postgres"
+    f"postgresql://postgres.kkjszxexisrfbctqllhn:{key}"
+    f"@aws-0-ap-south-1.pooler.supabase.com:6543/postgres"
 )
 
 
