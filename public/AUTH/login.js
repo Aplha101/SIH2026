@@ -33,8 +33,7 @@ async function userlogin() {
 
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
-
-        window.location.href = "../dashboard/dashboard.html";
+        data.user.role == "student" ? window.location.href = "../student/index.html" :  window.location.href = "../counsellor/index.html" 
 
     } catch (err) {
         console.error("Login error:", err);
