@@ -22,7 +22,7 @@ app = Flask(__name__)
 
 CORS(app, origins=[
     "http://localhost:3000",
-    "https://mindfulu.vercel.app"
+    "https://sih-2026-fawn.vercel.app"
 ])
 
 # JWT configuration
