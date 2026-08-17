@@ -53,6 +53,12 @@ def get_db_connection():
 # -------------------------------------------------------------
 # SIGNUP / REGISTER
 # -------------------------------------------------------------
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({
+        "success": True,
+        "message": "API is running"
+    })
 
 @app.route("/signup", methods=["POST"])
 def signup():
