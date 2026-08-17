@@ -162,13 +162,16 @@ def signup():
 @app.route("/login", methods=["POST"])
 def login():
     conn = None
+
     try:
         data = request.get_json()
+
         if not data:
             return jsonify({
                 "success": False,
                 "error": "Invalid JSON"
             }), 400
+
         email = data.get("email")
         password = data.get("password")
 
@@ -200,7 +203,26 @@ def login():
 
             user = cursor.fetchone()
 
-        # Check password
+        # -------------------------------------------------
+        # TEMPORARY LOGIN DEBUG
+        # -------------------------------------------------
+
+        print("LOGIN DEBUG - user found:", user is not None)
+
+        if user:
+            print("LOGIN DEBUG - email found:", user["email"])
+            print(
+                "LOGIN DEBUG - password matches:",
+                check_password_hash(
+                    user["password"],
+                    password
+                )
+            )
+
+        # -------------------------------------------------
+        # CHECK PASSWORD
+        # -------------------------------------------------
+
         if not user or not check_password_hash(
             user["password"],
             password
@@ -210,9 +232,9 @@ def login():
                 "error": "Invalid email or password"
             }), 401
 
-        # -----------------------------------------------------
+        # -------------------------------------------------
         # CREATE JWT
-        # -----------------------------------------------------
+        # -------------------------------------------------
 
         access_token = create_access_token(
             identity=str(user["id"]),
@@ -221,7 +243,7 @@ def login():
             }
         )
 
-        # Never send password back to frontend
+        # Never send the password hash to the frontend
         del user["password"]
 
         return jsonify({
@@ -244,8 +266,6 @@ def login():
 
         if conn:
             conn.close()
-
-
 # -------------------------------------------------------------
 # FETCH ALL USERS
 # ADMIN ONLY
