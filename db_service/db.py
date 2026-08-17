@@ -20,7 +20,10 @@ load_dotenv()
 
 app = Flask(__name__)
 
-CORS(app)
+CORS(app, origins=[
+    "http://localhost:3000",
+    "https://mindfulu.vercel.app"
+])
 
 # JWT configuration
 app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
