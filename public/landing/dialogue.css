@@ -1,0 +1,148 @@
+/* Dialogue Page Layout */
+.dialogue-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(
+        to right top,
+        rgba(63, 52, 148, 0.95),
+        rgba(0, 95, 173, 0.95),
+        rgba(0, 117, 163, 0.95),
+        rgba(0, 131, 138, 0.95),
+        rgba(50, 133, 110, 0.95)
+    );
+    padding: 1.5rem;
+}
+
+.dialogue-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Quest Dialogue Card */
+/* Quest Dialogue Card (Cream Color) */
+.quest-card {
+    background-color: #F8EEE3;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    padding: 2.25rem 2rem 2rem;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    animation: calmFloat 6s ease-in-out infinite, fadeInCard 1s ease-out forwards;
+}
+
+/* Updated Speaker Tag for Cream Background */
+.speaker-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #007fe2;
+    background: rgba(0, 127, 226, 0.1);
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+}
+
+/* Updated Dialogue Text for Cream Background */
+.dialogue-text {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #2D3748;
+    min-height: 4.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Updated Quest Button for Cream Background */
+.quest-btn {
+    background: #007fe2;
+    color: #FFF9F2;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.75rem 1.8rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 127, 226, 0.25);
+    transition: all 0.25s ease;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.quest-btn.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.quest-btn:hover {
+    background: #6559cf;
+    color: #FFF9F2;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(101, 89, 207, 0.3);
+}
+
+.quest-btn:active {
+    transform: translateY(0);
+}
+
+@keyframes calmFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes fadeInCard {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+    }
+}   
+
+/* Container to group both buttons cleanly */
+.button-group {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+/* Secondary/Skip Button Style */
+.skip-btn {
+    background: transparent;
+    color: #64748B;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.75rem 1.4rem;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    opacity: 1; /* Always visible */
+}
+
+.skip-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: #1E293B;
+    transform: translateY(-2px);
+}
+
+.skip-btn:active {
+    transform: translateY(0);
+}

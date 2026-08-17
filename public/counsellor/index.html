@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MindfulU - Counsellor Dashboard</title>
+
+
+    <style>
+
+        :root {
+            --cream: #F8EEE3;
+            --white: #FFFDF9;
+            --sage: #B7C9C0;
+            --sage-dark: #55766C;
+            --sage-button: #789A8F;
+            --peach: #E9C6A9;
+            --peach-light: #F3DED0;
+            --text: #4E504C;
+            --muted: #7A7D77;
+            --border: #E6D9CC;
+            --red: #C98272;
+        }
+
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--cream);
+            color: var(--text);
+        }
+
+
+        /* SIDEBAR */
+
+        .sidebar {
+
+            position: fixed;
+
+            width: 250px;
+            height: 100vh;
+
+            background: var(--white);
+
+            border-right: 1px solid var(--border);
+
+            padding: 30px 20px;
+
+        }
+
+
+        .logo {
+
+            font-family: Georgia, serif;
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            color: var(--sage-dark);
+
+            text-align: center;
+
+            margin-bottom: 45px;
+
+        }
+
+
+        .logo span {
+
+            display: block;
+
+            font-family: Arial;
+
+            font-size: 10px;
+
+            letter-spacing: 3px;
+
+            margin-top: 5px;
+
+        }
+
+
+        .nav-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 14px 16px;
+
+            margin-bottom: 8px;
+
+            border-radius: 13px;
+
+            text-decoration: none;
+
+            color: var(--muted);
+
+            transition: .2s;
+
+        }
+
+
+        .nav-item:hover,
+        .nav-item.active {
+
+            background: var(--sage);
+
+            color: var(--sage-dark);
+
+        }
+
+
+        .nav-icon {
+            font-size: 19px;
+        }
+
+
+        .logout {
+
+            position: absolute;
+
+            bottom: 25px;
+
+            width: calc(100% - 40px);
+
+        }
+
+
+        /* MAIN */
+
+        .main {
+
+            margin-left: 250px;
+
+            padding: 35px;
+
+            min-height: 100vh;
+
+        }
+
+
+        .topbar {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        .welcome h1 {
+
+            font-family: Georgia, serif;
+
+            color: var(--sage-dark);
+
+            font-size: 32px;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .welcome p {
+            color: var(--muted);
+        }
+
+
+        .profile {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .avatar {
+
+            width: 48px;
+            height: 48px;
+
+            border-radius: 50%;
+
+            background: var(--sage);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: var(--sage-dark);
+
+            font-weight: bold;
+
+        }
+
+
+        /* STAT CARDS */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .stat {
+
+            background: var(--white);
+
+            padding: 22px;
+
+            border-radius: 20px;
+
+            border: 1px solid var(--border);
+
+        }
+
+
+        .stat-icon {
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 12px;
+
+            background: var(--peach-light);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 14px;
+
+        }
+
+
+        .stat h3 {
+
+            font-size: 28px;
+
+            color: var(--sage-dark);
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .stat p {
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+        }
+
+
+        /* CONTENT GRID */
+
+        .content {
+
+            display: grid;
+
+            grid-template-columns: 2fr 1fr;
+
+            gap: 22px;
+
+        }
+
+
+        .card {
+
+            background: var(--white);
+
+            border-radius: 22px;
+
+            padding: 25px;
+
+            border: 1px solid var(--border);
+
+            box-shadow:
+                0 10px 30px
+                rgba(82,105,95,.06);
+
+        }
+
+
+        .card-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .card-header h2 {
+
+            font-family: Georgia, serif;
+
+            color: var(--sage-dark);
+
+        }
+
+
+        .view {
+
+            color: var(--sage-dark);
+
+            font-size: 14px;
+
+            text-decoration: none;
+
+        }
+
+
+        /* APPOINTMENTS */
+
+        .appointment {
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 16px;
+
+            border-radius: 15px;
+
+            background: var(--cream);
+
+            margin-bottom: 12px;
+
+            gap: 15px;
+
+        }
+
+
+        .student-avatar {
+
+            width: 45px;
+            height: 45px;
+
+            border-radius: 50%;
+
+            background: var(--sage);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            color: var(--sage-dark);
+
+            font-weight: bold;
+
+        }
+
+
+        .student-info {
+
+            flex: 1;
+
+        }
+
+
+        .student-info h4 {
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .student-info p {
+
+            font-size: 13px;
+
+            color: var(--muted);
+
+        }
+
+
+        .appointment-time {
+
+            text-align: right;
+
+            color: var(--sage-dark);
+
+            font-size: 14px;
+
+        }
+
+
+        .appointment-time strong {
+
+            display: block;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .join-btn {
+
+            border: none;
+
+            background: var(--sage-button);
+
+            color: white;
+
+            padding: 9px 13px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+        }
+
+
+        /* STUDENT REQUESTS */
+
+        .request {
+
+            padding: 15px;
+
+            background: var(--cream);
+
+            border-radius: 15px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .request-top {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .request p {
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .request-buttons {
+
+            display: flex;
+
+            gap: 8px;
+
+        }
+
+
+        .accept {
+
+            border: none;
+
+            background: var(--sage-button);
+
+            color: white;
+
+            padding: 8px 13px;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+        }
+
+
+        .decline {
+
+            border: none;
+
+            background: var(--peach-light);
+
+            color: var(--text);
+
+            padding: 8px 13px;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+        }
+
+
+        /* STUDENT WELLNESS */
+
+        .wellness-row {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .wellness-avatar {
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            background: var(--sage);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: var(--sage-dark);
+
+        }
+
+
+        .wellness-info {
+
+            flex: 1;
+
+        }
+
+
+        .wellness-info h4 {
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .bar {
+
+            width: 100%;
+
+            height: 8px;
+
+            background: var(--cream);
+
+            border-radius: 20px;
+
+        }
+
+
+        .bar span {
+
+            display: block;
+
+            height: 100%;
+
+            border-radius: 20px;
+
+            background: var(--sage-button);
+
+        }
+
+
+        .percentage {
+
+            font-size: 13px;
+
+            color: var(--sage-dark);
+
+        }
+
+
+        /* ALERT */
+
+        .alert {
+
+            background: var(--peach-light);
+
+            border-radius: 18px;
+
+            padding: 20px;
+
+            margin-top: 22px;
+
+        }
+
+
+        .alert h3 {
+
+            font-family: Georgia, serif;
+
+            color: var(--sage-dark);
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .alert p {
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* MOBILE */
+
+        @media(max-width: 1000px) {
+
+            .stats {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+            .content {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media(max-width: 700px) {
+
+            .sidebar {
+
+                width: 75px;
+
+                padding: 20px 10px;
+
+            }
+
+            .logo {
+
+                font-size: 18px;
+
+            }
+
+            .logo span,
+            .nav-item span:not(.nav-icon) {
+
+                display: none;
+
+            }
+
+            .nav-item {
+
+                justify-content: center;
+
+            }
+
+            .logout {
+
+                width: calc(100% - 20px);
+
+            }
+
+            .main {
+
+                margin-left: 75px;
+
+                padding: 20px;
+
+            }
+
+        }
+
+
+        @media(max-width: 500px) {
+
+            .main {
+
+                margin-left: 0;
+
+                padding: 15px;
+
+                padding-bottom: 80px;
+
+            }
+
+            .sidebar {
+
+                position: fixed;
+
+                bottom: 0;
+
+                left: 0;
+
+                width: 100%;
+
+                height: 65px;
+
+                display: flex;
+
+                justify-content: space-around;
+
+                padding: 8px;
+
+                z-index: 100;
+
+            }
+
+            .logo,
+            .logout {
+
+                display: none;
+
+            }
+
+            .stats {
+
+                grid-template-columns: 1fr 1fr;
+
+                gap: 10px;
+
+            }
+
+            .welcome h1 {
+
+                font-size: 24px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            MindfulU
+
+            <span>COUNSELLOR</span>
+
+        </div>
+
+
+        <a href="#" class="nav-item active">
+
+            <span class="nav-icon">⌂</span>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="#" class="nav-item">
+
+            <span class="nav-icon">◷</span>
+
+            <span>Appointments</span>
+
+        </a>
+
+
+        <a href="#" class="nav-item">
+
+            <span class="nav-icon">👥</span>
+
+            <span>Students</span>
+
+        </a>
+
+
+        <a href="#" class="nav-item">
+
+            <span class="nav-icon">💬</span>
+
+            <span>Messages</span>
+
+        </a>
+
+
+        <a href="#" class="nav-item">
+
+            <span class="nav-icon">📝</span>
+
+            <span>Session Notes</span>
+
+        </a>
+
+
+        <a href="#" class="nav-item">
+
+            <span class="nav-icon">⚙</span>
+
+            <span>Settings</span>
+
+        </a>
+
+
+        <a href="#" class="nav-item logout">
+
+            <span class="nav-icon">↪</span>
+
+            <span>Log out</span>
+
+        </a>
+
+    </aside>
+
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+
+        <header class="topbar">
+
+            <div class="welcome">
+
+                <h1>Good afternoon, Dr. Sarah 🌿</h1>
+
+                <p>
+                    Here's what's happening with your students today.
+                </p>
+
+            </div>
+
+
+            <div class="profile">
+
+                <div class="avatar">
+                    S
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- STATISTICS -->
+
+        <section class="stats">
+
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    📅
+                </div>
+
+                <h3>6</h3>
+
+                <p>Today's Sessions</p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    👥
+                </div>
+
+                <h3>28</h3>
+
+                <p>Active Students</p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    💬
+                </div>
+
+                <h3>4</h3>
+
+                <p>New Messages</p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    🔔
+                </div>
+
+                <h3>3</h3>
+
+                <p>Requests</p>
+
+            </div>
+
+
+        </section>
+
+
+
+        <div class="content">
+
+
+            <!-- TODAY'S APPOINTMENTS -->
+
+            <section class="card">
+
+                <div class="card-header">
+
+                    <h2>Today's appointments</h2>
+
+                    <a href="#" class="view">
+                        View calendar →
+                    </a>
+
+                </div>
+
+
+                <div class="appointment">
+
+                    <div class="student-avatar">
+                        A
+                    </div>
+
+                    <div class="student-info">
+
+                        <h4>Alex Johnson</h4>
+
+                        <p>
+                            Individual Counselling
+                        </p>
+
+                    </div>
+
+                    <div class="appointment-time">
+
+                        <strong>10:00 AM</strong>
+
+                        <span>45 min</span>
+
+                    </div>
+
+                    <button class="join-btn">
+                        Start
+                    </button>
+
+                </div>
+
+
+                <div class="appointment">
+
+                    <div class="student-avatar">
+                        R
+                    </div>
+
+                    <div class="student-info">
+
+                        <h4>Riya Sharma</h4>
+
+                        <p>
+                            Stress & Anxiety
+                        </p>
+
+                    </div>
+
+                    <div class="appointment-time">
+
+                        <strong>11:30 AM</strong>
+
+                        <span>45 min</span>
+
+                    </div>
+
+                    <button class="join-btn">
+                        Start
+                    </button>
+
+                </div>
+
+
+                <div class="appointment">
+
+                    <div class="student-avatar">
+                        M
+                    </div>
+
+                    <div class="student-info">
+
+                        <h4>Michael Lee</h4>
+
+                        <p>
+                            Academic Stress
+                        </p>
+
+                    </div>
+
+                    <div class="appointment-time">
+
+                        <strong>2:30 PM</strong>
+
+                        <span>45 min</span>
+
+                    </div>
+
+                    <button class="join-btn">
+                        Start
+                    </button>
+
+                </div>
+
+
+                <div class="appointment">
+
+                    <div class="student-avatar">
+                        N
+                    </div>
+
+                    <div class="student-info">
+
+                        <h4>Neha Patel</h4>
+
+                        <p>
+                            General Wellbeing
+                        </p>
+
+                    </div>
+
+                    <div class="appointment-time">
+
+                        <strong>4:00 PM</strong>
+
+                        <span>45 min</span>
+
+                    </div>
+
+                    <button class="join-btn">
+                        Start
+                    </button>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- REQUESTS -->
+
+            <section class="card">
+
+                <div class="card-header">
+
+                    <h2>Student requests</h2>
+
+                    <a href="#" class="view">
+                        See all
+                    </a>
+
+                </div>
+
+
+                <div class="request">
+
+                    <div class="request-top">
+
+                        <strong>Student #1042</strong>
+
+                        <span>Today</span>
+
+                    </div>
+
+                    <p>
+                        Requesting a counselling appointment.
+                    </p>
+
+                    <div class="request-buttons">
+
+                        <button
+                            class="accept"
+                            onclick="acceptRequest()"
+                        >
+                            Accept
+                        </button>
+
+                        <button class="decline">
+                            Later
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="request">
+
+                    <div class="request-top">
+
+                        <strong>Student #1087</strong>
+
+                        <span>Yesterday</span>
+
+                    </div>
+
+                    <p>
+                        Wants to discuss academic stress.
+                    </p>
+
+                    <div class="request-buttons">
+
+                        <button
+                            class="accept"
+                            onclick="acceptRequest()"
+                        >
+                            Accept
+                        </button>
+
+                        <button class="decline">
+                            Later
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- STUDENT WELLNESS -->
+
+            <section class="card">
+
+                <div class="card-header">
+
+                    <h2>Student wellbeing</h2>
+
+                    <a href="#" class="view">
+                        View students →
+                    </a>
+
+                </div>
+
+
+                <div class="wellness-row">
+
+                    <div class="wellness-avatar">
+                        A
+                    </div>
+
+                    <div class="wellness-info">
+
+                        <h4>Alex</h4>
+
+                        <div class="bar">
+                            <span style="width:78%"></span>
+                        </div>
+
+                    </div>
+
+                    <span class="percentage">
+                        78%
+                    </span>
+
+                </div>
+
+
+                <div class="wellness-row">
+
+                    <div class="wellness-avatar">
+                        R
+                    </div>
+
+                    <div class="wellness-info">
+
+                        <h4>Riya</h4>
+
+                        <div class="bar">
+                            <span style="width:64%"></span>
+                        </div>
+
+                    </div>
+
+                    <span class="percentage">
+                        64%
+                    </span>
+
+                </div>
+
+
+                <div class="wellness-row">
+
+                    <div class="wellness-avatar">
+                        M
+                    </div>
+
+                    <div class="wellness-info">
+
+                        <h4>Michael</h4>
+
+                        <div class="bar">
+                            <span style="width:51%"></span>
+                        </div>
+
+                    </div>
+
+                    <span class="percentage">
+                        51%
+                    </span>
+
+                </div>
+
+
+                <div class="wellness-row">
+
+                    <div class="wellness-avatar">
+                        N
+                    </div>
+
+                    <div class="wellness-info">
+
+                        <h4>Neha</h4>
+
+                        <div class="bar">
+                            <span style="width:86%"></span>
+                        </div>
+
+                    </div>
+
+                    <span class="percentage">
+                        86%
+                    </span>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ALERTS -->
+
+            <section class="card">
+
+                <div class="card-header">
+
+                    <h2>Attention</h2>
+
+                </div>
+
+
+                <div class="alert">
+
+                    <h3>Student wellbeing alert</h3>
+
+                    <p>
+                        A student has reported a significant
+                        change in their recent mood check-ins.
+                        Review their profile and consider
+                        reaching out.
+                    </p>
+
+                </div>
+
+
+                <div class="alert">
+
+                    <h3>3 session notes pending</h3>
+
+                    <p>
+                        Remember to complete your notes
+                        following today's counselling sessions.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+
+    <script>
+
+        function acceptRequest() {
+
+            alert(
+                "Student request accepted successfully."
+            );
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

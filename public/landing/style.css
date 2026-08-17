@@ -1,0 +1,293 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: #F8EEE3;
+    font-family: "Outfit", sans-serif;
+    color: #2D3748;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 55vh;
+    width: 100%;
+    background-image: linear-gradient(
+        to right top,
+        rgba(63, 52, 148, 0.92),
+        rgba(0, 95, 173, 0.92),
+        rgba(0, 117, 163, 0.92),
+        rgba(0, 131, 138, 0.92),
+        rgba(50, 133, 110, 0.92)
+    );
+    box-shadow: rgba(0, 0, 0, 0.55) 0px -60px 45px -20px inset;
+    padding: 2.5rem 2rem;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.mainhead {
+    font-size: clamp(3.5rem, 12vw, 9.5rem);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: #FFF9F2;
+    border-bottom: 4px solid #FFF9F2;
+    padding-bottom: 0.5rem;
+    
+    animation: calmBreath 8s ease-in-out infinite;
+    display: inline-block;
+    will-change: transform, opacity;
+}
+
+.breathbelow {
+    font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 249, 242, 0.85);
+    margin-top: 0.6rem;
+    padding-left: 0.2rem;
+}
+/* Glassmorphism Input & Button Wrapper */
+.input-group {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    border-radius: 40px;
+    padding: 4px 6px 4px 1.4rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    width: 320px;
+}
+
+.input-group:focus-within {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: #FFF9F2;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    width: 350px;
+}
+
+.input-group input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    font-family: inherit;
+    color: #FFF9F2;
+    padding: 0.6rem 0;
+    width: 100%;
+}
+
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Arrow Button Styling */
+.submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background-color: #FFF9F2;
+    color: #007fe2;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.submit-btn:hover {
+    transform: translateX(3px);
+    background-color: #FFFFFF;
+    color: #6559cf;
+}
+
+.submit-btn:active {
+    transform: scale(0.95);
+}
+
+/* Footer Section */
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+    width: 100%;
+    padding: 3rem 2rem 2rem;
+    gap: 2.5rem;
+    box-shadow: 0px -10px 20px rgba(82, 105, 95, 0.12);
+    opacity: 0.7;
+
+}
+
+/* 3 Cards Container */
+.cards-container {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 950px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    flex: 1;
+    min-width: 240px;
+    background: #FFFFFF;
+    padding: 1.75rem 1.5rem;
+    border-radius: 14px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.card h3 {
+    font-size: 1.25rem;
+    color: #007fe2;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.card p {
+    font-size: 0.95rem;
+    color: #4A5568;
+    line-height: 1.5;
+}
+
+/* Contact Crisis Hub */
+.contact {
+    width: 100%;
+    max-width: 950px;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.contact h2 {
+    font-size: 1.4rem;
+    color: #1A202C;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.helpline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.helpline-item {
+    background: #FFFFFF;
+    padding: 1.25rem 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.helpline-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: #EBF8FF;
+    color: #007fe2;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+}
+
+.helpline-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #2D3748;
+}
+
+.contact a {
+    color: #0098d1;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.contact a:hover {
+    color: #6559cf;
+    text-decoration: underline;
+}
+
+.disclaimer {
+    font-size: 0.8rem;
+    color: #718096;
+    line-height: 1.4;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+}
+
+/* Breathing Animation for BREATH Title */
+@keyframes calmBreath {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.85;
+        text-shadow: 0 0 10px rgba(255, 249, 242, 0.2);
+    }
+    50% {
+        transform: scale(1.06);
+        opacity: 1;
+        text-shadow: 0 0 35px rgba(255, 249, 242, 0.7);
+    }
+}
+
+.mainhead {
+    font-size: clamp(3.5rem, 12vw, 9.5rem);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: #FFF9F2;
+    border-bottom: 4px solid #FFF9F2;
+    padding-bottom: 0.5rem;
+    
+    animation: calmBreath 8s ease-in-out infinite;
+    display: inline-block;
+    will-change: transform, opacity;
+}
